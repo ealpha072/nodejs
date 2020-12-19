@@ -3,11 +3,18 @@ var http =require('http')//module created..
 var myDate = require('./firstmodule')
 
 //makes local pc run as a server
+//creates server object..function passed in .createServer runs when the port is opened
 http.createServer(function(req,res){
-  res.writeHead(200,{'Content-Type':'text/html'});
-  res.write('The date and time are currently: '+ myDate.myDateTime)
-  res.end('')
-}).listen(8080)
+  //.createServer creates a http server 
+  res.writeHead(200,{'Content-Type':'text/html'});//added if response from http server is to be displayed as html
+  //first parameter of writehead is status code; 200 means its ok
+  //second par is object containing response header
+  res.write(req.url)
+  //res.write('The date and time are currently: '+ myDate.myDateTime)//writes response to client
+  res.end()//ends response
+}).listen(8080)//port to listen to
 
+//the function passed into createServer has req argument which is the client request as an object
+//the object has a url prepertycoming after domain name.
 
-//modules...
+var http
