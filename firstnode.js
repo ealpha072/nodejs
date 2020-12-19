@@ -52,3 +52,16 @@ fs.writeFile('mynewfile3.txt', 'Hello content!', function (err) {
   console.log('Saved!');
 });
 
+//update files
+fs.appendFile('mynewfile1.txt', ' This is my text.', function (err) {
+  if (err) throw err;
+  console.log('Updated!');
+  // appends the specified content at the end
+});
+
+fs.writeFile('mynewfile3.txt', 'This is my text', function (err) {
+  if (err) throw err;
+  console.log('Replaced!');
+  //replaces the specified file and content
+});
+
