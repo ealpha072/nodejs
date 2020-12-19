@@ -65,3 +65,10 @@ fs.writeFile('mynewfile3.txt', 'This is my text', function (err) {
   //replaces the specified file and content
 });
 
+
+//rename files
+fs.rename('mynewfile1.txt', 'myrenamedfile.txt', function (err) {
+  if (err) throw err;
+  console.log('File Renamed!');
+  //renames a file
+});
