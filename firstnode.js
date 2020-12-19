@@ -1,4 +1,4 @@
-var http =require('http')//module created..
+/*var http =require('http')//module created..
 //http module allows node to transfer data over http
 var myDate = require('./firstmodule')
 
@@ -17,4 +17,17 @@ http.createServer(function(req,res){
 //the function passed into createServer has req argument which is the client request as an object
 //the object has a url prepertycoming after domain name.
 
-var http
+///FILE SYSTEM MODULE..
+
+var fs  = require ('fs'); //includes the file system module
+//read files*/
+var http = require('http');
+var fs = require('fs');
+
+http.createServer(function(req,res){
+  fs.readFile('demofile.html',function(err,data){
+    res.writeHead(200,{'Content-Type':'text/html'});
+    res.write(data);
+    return res.end();
+  });
+}).listen(8080);
