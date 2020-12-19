@@ -1,4 +1,4 @@
-/*var http =require('http')//module created..
+var http =require('http')//module created..
 //http module allows node to transfer data over http
 var myDate = require('./firstmodule')
 
@@ -20,7 +20,7 @@ http.createServer(function(req,res){
 ///FILE SYSTEM MODULE..
 
 var fs  = require ('fs'); //includes the file system module
-//read files*/
+//read files
 var http = require('http');
 var fs = require('fs');
 
@@ -31,3 +31,24 @@ http.createServer(function(req,res){
     return res.end();
   });
 }).listen(8080);
+
+//create files
+fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
+  //appends contentb to a file if non exist, a file is created
+  if (err) throw err;
+  console.log('Saved!');
+});
+
+fs.open('mynewfile2.txt', 'w', function (err, file) {
+  //w is a flag for writing on the file. if no file exist, an empty one is created
+  if (err) throw err;
+  console.log('Saved!');
+});
+
+fs.writeFile('mynewfile3.txt', 'Hello content!', function (err) {
+  //replaces the specified file and content if it exists
+  //If the file does not exist, a new file, containing the specified content, will be created
+  if (err) throw err;
+  console.log('Saved!');
+});
+
