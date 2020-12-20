@@ -137,35 +137,42 @@ var formidable = require('formidable')
 
 //below code creates a html form with upload field
 
-var http = require('http');
-var formidable = require ('formidable');
-var fs =require('fs')
+      var http = require('http');
+      var formidable = require ('formidable');
+      var fs =require('fs')
 
-htttp.createServer(function(req,res){
-  //parsing the uploaded file
-  if(req.url === '/fileupload'){
-    var form = new formidable.IncomingForm();
-    form.parse(req, function(err,fields,files){
-      var oldpath = files.filetoupload.path;
-      var newpath= 'C:/Users/PC/Desktop/github-repos/nodejs'+files.filetoupload.name;
-      fs.rename(oldpath,newpath,function(err){
-        if(err){
-          throw err
+      htttp.createServer(function(req,res){
+        //parsing the uploaded file
+        if(req.url === '/fileupload'){
+          var form = new formidable.IncomingForm();
+          form.parse(req, function(err,fields,files){
+            var oldpath = files.filetoupload.path;
+            var newpath= 'C:/Users/PC/Desktop/github-repos/nodejs'+files.filetoupload.name;
+            fs.rename(oldpath,newpath,function(err){
+              if(err){
+                throw err
+              }else{
+                res.write('File uploaded and saved')
+                res.end()
+              }
+            })
+            /*
+            res.write('File uploaded')
+            res.end()*/
+          })
         }else{
-          res.write('File uploaded and saved')
-          res.end()
+          res.writeHead(200,{'Content-Type':'tetx/html'});
+          res.write('<form action="fileupload" method="post" enctype="multipart/form-data">')
+          res.write('<input type="file" name="filetoupload"><br>')
+          res.write('<input type="submit">');
+          res.write('</form>');
+          return res.end()
         }
-      })
-      /*
-      res.write('File uploaded')
-      res.end()*/
-    })
-  }else{
-    res.writeHead(200,{'Content-Type':'tetx/html'});
-    res.write('<form action="fileupload" method="post" enctype="multipart/form-data">')
-    res.write('<input type="file" name="filetoupload"><br>')
-    res.write('<input type="submit">');
-    res.write('</form>');
-    return res.end()
-  }
-}).listen(8080);
+      }).listen(8080);
+
+//send emails with node
+
+//the nodemailer package is installed with npm to enable this then included
+var nodemailer = require('nodemailer')
+        //to use gmail to send mails
+        
