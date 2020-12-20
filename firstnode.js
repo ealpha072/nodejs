@@ -94,20 +94,36 @@ fs.rename('mynewfile1.txt', 'myrenamedfile.txt', function (err) {
     //the below code opens the requested file and returns content to the client
     //if ther is an error, 404 is thrown
 
-var http = require('http');
-var url = require('url');
-var fs =require('fs')
+      var http = require('http');
+      var url = require('url');
+      var fs =require('fs')
 
-http.createServer(function(req,res){
-  var q = url.parse(req.url, true),
-  var filename ='.'+ q.pathname;
-  fs.readFile(filename,function(err,data){
-    if(err){
-      res.writeHead(404,{'Content-Type': 'text/html'});
-      return res.end()
-    }
-    res.writeHead(200,{'Content-Type':'text/html'})
-    res.write(data)
-    return res.end()
-  })
-}).listen(8080)
+      http.createServer(function(req,res){
+        var q = url.parse(req.url, true),
+        var filename ='.'+ q.pathname;
+        fs.readFile(filename,function(err,data){
+          if(err){
+            res.writeHead(404,{'Content-Type': 'text/html'});
+            return res.end()
+          }
+          res.writeHead(200,{'Content-Type':'text/html'})
+          res.write(data)
+          return res.end()
+        })
+      }).listen(8080)
+
+//EVENTS IN NODEJS
+      //events module
+      var events = require('events') //includes the vent module
+      var eventEmitter = new events.EventEmitter() //
+
+      //consider below
+      //creates an event handler
+      var myEventHandler  =function(){
+        console.log('I hear a scream')
+      }
+
+      //assinging the event handler to an event
+      eventEmitter.on('scream',myEventHandler)
+      //firing the 'scream' event
+      eventEmitter.emit('scream')
